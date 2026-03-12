@@ -465,7 +465,7 @@ function updateQuizHeader(type) {
     const sectionNum = type === 'sentence' ? 4 : 3;
     subtitle.innerHTML = `
         <div class="quiz-header-bar">
-            <button onclick="init()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);margin-right:10px;">??</button><span style="flex:1;">Dars ${appState.activeLessonId} - Qism ${sectionNum} - Mashq ${appState.exerciseIndex + 1}</span>
+            <button onclick="init()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);margin-right:10px;">❮</button><span style="flex:1;">Dars ${appState.activeLessonId} - Qism ${sectionNum} - Mashq ${appState.exerciseIndex + 1}</span>
             <span class="score-area">
                 <span class="score-correct"><span>✔️</span> ${appState.correctCount}</span>
                 <span class="score-wrong"><span>❌</span> ${appState.wrongCount}</span>
@@ -655,5 +655,6 @@ function renderCompletion() {
 
 // Start
 init();
+
 
 
