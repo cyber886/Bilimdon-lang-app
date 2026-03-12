@@ -23,19 +23,13 @@ const subLessons = [
     { type: 'sentence', title: "Matn bilan mashqlar", icon: "✍️" },
 ];
 
-// Sample Exercises for Lesson 14
-const sentenceExercises = [
-    {
-        uz: "Shomil kecha 6 dan 9 gacha rivoyatlar aytib berayotgan edi.",
-        enWords: ["Shomil", "was", "telling", "stories", "from", "six", "to", "nine", "yesterday", "the", "were", "told"],
-        correctOrder: ["Shomil", "was", "telling", "stories", "from", "six", "to", "nine", "yesterday"]
-    },
-    {
-        uz: "Ular futbol o'ynayotgan edilar.",
-        enWords: ["They", "were", "playing", "football", "was", "played", "the", "soccer"],
-        correctOrder: ["They", "were", "playing", "football"]
+// Dynamic Sentences Loader
+function getLessonSentences(lessonId) {
+    if (typeof lessonSentences !== 'undefined' && lessonSentences[lessonId]) {
+        return lessonSentences[lessonId];
     }
-];
+    return lessonSentences[1] || [];
+}
 
 // Per-lesson vocabulary data (50+ words each)
 const lessonVocab = {
@@ -476,12 +470,14 @@ function updateQuizHeader(type) {
 
 // Render Sentence Builder Exercise
 function renderSentenceExercise() {
-    if (appState.exerciseIndex >= sentenceExercises.length) {
+    const exercisesList = getLessonSentences(appState.activeLessonId);
+    if (appState.exerciseIndex >= exercisesList.length) {
         return renderCompletion();
     }
 
     appState.currentConstructedSentence = [];
-    const ex = sentenceExercises[appState.exerciseIndex];
+    const exercisesList = getLessonSentences(appState.activeLessonId);
+    const ex = exercisesList[appState.exerciseIndex];
     updateQuizHeader('sentence');
 
     mainContent.innerHTML = `
@@ -524,7 +520,8 @@ window.selectWord = function (btn) {
     btn.classList.add('used');
     updateConstructedSentence();
 
-    const ex = sentenceExercises[appState.exerciseIndex];
+    const exercisesList = getLessonSentences(appState.activeLessonId);
+    const ex = exercisesList[appState.exerciseIndex];
     if (appState.currentConstructedSentence.length === ex.correctOrder.length) {
         checkSentenceAnswer();
     }
@@ -540,7 +537,8 @@ function updateConstructedSentence() {
 }
 
 function checkSentenceAnswer() {
-    const ex = sentenceExercises[appState.exerciseIndex];
+    const exercisesList = getLessonSentences(appState.activeLessonId);
+    const ex = exercisesList[appState.exerciseIndex];
     if (appState.currentConstructedSentence.join(' ') === ex.correctOrder.join(' ')) {
         appState.correctCount++;
         showAlert(true, "Zo'r! Siz to'g'ri topdingiz.", () => {
