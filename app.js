@@ -560,7 +560,7 @@ function checkSentenceAnswer() {
 // Render Study Vocab (flip cards)
 function renderStudyVocab() {
     var vocabList = getLessonVocab(appState.activeLessonId);
-    subtitle.innerHTML = '<div class="quiz-header-bar"><button onclick="init()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);margin-right:10px;">&#8592;</button><span style="flex:1;">Dars ' + appState.activeLessonId + ' - So\'zlar Lug\'ati</span><span style="color:var(--text-muted);font-size:14px;">' + vocabList.length + ' ta so\'z</span></div>';
+    subtitle.innerHTML = '<div class="quiz-header-bar"><button onclick="init()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-main);margin-right:10px;">❮</button><span style="flex:1;">Dars ' + appState.activeLessonId + ' - So\'zlar Lug\'ati</span><span style="color:var(--text-muted);font-size:14px;">' + vocabList.length + ' ta so\'z</span></div>';
     var html = '<div style="display:grid;gap:10px;padding:4px 0;">';
     for (var i = 0; i < vocabList.length; i++) {
         var item = vocabList[i];
@@ -655,6 +655,7 @@ function renderCompletion() {
 
 // Start
 init();
+
 
 
 
